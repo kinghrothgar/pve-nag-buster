@@ -1,5 +1,8 @@
 ## pve-nag-buster 
-https://github.com/foundObjects/pve-nag-buster
+
+This is a fork of [foundObjects/pve-nag-buster](https://github.com/foundObjects/pve-nag-buster) to add support for PVE 8+.
+
+----
 
 `pve-nag-buster` is a dpkg hook script that persistently removes license nags
 from Proxmox VE 6.x and up. Install it once and you won't see another license
@@ -10,7 +13,7 @@ means. High quality open source software like Proxmox needs our support!
 
 ### News:
 
-Last updated for: pve-manager/6.4-4/337d6701 (running kernel: 5.4.106-1-pve)
+Last updated for: pve-manager/8.1.3 (running kernel: 6.5.11-4-pve)
 
 ### How does it work?
 
@@ -24,8 +27,12 @@ and calls the hook script once. There are no external dependencies beyond the ba
 packages installed with PVE by default.
 
 ### Installation
+
+**Note: do not run the install command via the web shell, use SSH instead.** Script restarts the GUI when removing nag,
+and this interrupts the connection to the web shell and the script never disables enterprise repos.
+
 ```sh
-wget https://raw.githubusercontent.com/foundObjects/pve-nag-buster/master/install.sh
+wget https://raw.githubusercontent.com/Yrlish/pve-nag-buster/master/install.sh
 
 # Always read scripts downloaded from the internet before running them with sudo
 sudo bash install.sh
@@ -36,7 +43,7 @@ chmod +x install.sh && sudo ./install.sh
 
 With Git:
 ```sh
-git clone https://github.com/foundObjects/pve-nag-buster.git
+git clone https://github.com/Yrlish/pve-nag-buster.git
 
 # Always read scripts downloaded from the internet before running them with sudo
 cd pve-nag-buster && sudo ./install.sh
@@ -48,26 +55,12 @@ sudo ./install.sh --uninstall
 # remove /etc/apt/sources.list.d/pve-no-subscription.list if desired
 ```
 
-### Notes:
-
-#### Why is there base64 in my peanut-butter?
-
-For convenience the install script also contains a base64 encoded copy of the
-hook script, this makes installation possible without access to github or a
-full clone of the project directory.
-
-To inspect the base64 encoded script run `./install.sh --emit`; this dumps the
-encoded copy to stdout and quits. To install using the stored copy just run
-`sudo ./install.sh --offline`, no internet required.
-
 ### Thanks to:
 
-- John McLaren for his [blog post](https://www.reddit.com/user/seaqueue) documenting the web gui patch.
-- [Marlin Sööse](https://github.com/msoose) for the update for PVE 6.3+
+- Original contributors at https://github.com/foundObjects/pve-nag-buster
 
 ### Contact:
 
-[Open an issue](https://github.com/foundObjects/pve-nag-buster/issues) on GitHub
+[Open an issue](https://github.com/Yrlish/pve-nag-buster/issues) on GitHub
 
 Please get in touch if you find a way to improve anything, otherwise enjoy!
-
