@@ -8,20 +8,20 @@ SCRIPT="$(basename "$0")"
 
 # disable license nag: https://johnscs.com/remove-proxmox51-subscription-notice/
 
-if grep -qs "$NAGTOKEN" "$NAGFILE" > /dev/null 2>&1; then
-  echo "$SCRIPT: Removing Nag ..."
-  sed -i.orig "s/$NAGTOKEN/false/g" "$NAGFILE"
-  systemctl restart pveproxy.service
+if grep -qs "$NAGTOKEN" "$NAGFILE" >/dev/null 2>&1; then
+	echo "$SCRIPT: Removing Nag ..."
+	sed -i.orig "s/$NAGTOKEN/false/g" "$NAGFILE"
+	systemctl restart pveproxy.service
 fi
 
 # disable paid repo list
 disable_repo() {
-    local REPO_BASE="$1"
+	local REPO_BASE="$1"
 
-    if [ -f "$REPO_BASE.list" ]; then
-        echo "Disabling $REPO_BASE repo list ..."
-        mv -f "$REPO_BASE.list" "$REPO_BASE.disabled"
-    fi
+	if [ -f "$REPO_BASE.sources" ]; then
+		echo "Disabling $REPO_BASE repo list ..."
+		mv -f "$REPO_BASE.sources" "$REPO_BASE.disabled"
+	fi
 }
 
 # Disable pve-enterprise repo
